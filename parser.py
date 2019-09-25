@@ -1,4 +1,5 @@
 from selenium import webdriver
+from bs4 import BeautifulSoup
 
 path = 'C:/Users/gjb26/Desktop/chromedriver.exe'  # ex. C:/downloads/chromedriver.exe
 
@@ -18,3 +19,15 @@ driver.find_element_by_xpath('/html/body/form[1]/table/tbody/tr/td/table/tbody/t
 driver.implicitly_wait(3)
 
 driver.get('https://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do')
+html = driver.page_source
+
+soup = BeautifulSoup(html, 'html.parser')
+soup.prettify(formatter=lambda s: s.replace('&nbsp', ''))
+notices = soup.findAll('td',attrs={'rowspan':'2'})
+notices2 = soup.findAll('td',attrs={'rowspan':'3'})
+
+# for n in notices:
+#     print(n.text)
+
+for n in notices2:
+    print(n.text)
