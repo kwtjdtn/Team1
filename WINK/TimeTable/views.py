@@ -1,8 +1,8 @@
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
-
+from django.shortcuts import render, render_to_response
 
 # Create your views here.
+from django.template import RequestContext
 from selenium import webdriver
 from bs4 import BeautifulSoup
 
@@ -38,8 +38,9 @@ def Login(request):
     driver.find_element_by_xpath('/html/body/form[1]/table/tbody/tr/td/table/tbody/tr[4]/td[1]/table/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/input').click()
     driver.implicitly_wait(3)
 
-    driver.get('https://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do')
+
     try:
+        driver.get('https://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do')
         html = driver.page_source
 
         soup = BeautifulSoup(html, 'html.parser')
@@ -53,5 +54,7 @@ def Login(request):
         #     print(n.text)
         return HttpResponseRedirect('/admin')
     except:
-        return HttpResponse(request)
+        return
+
+
 
