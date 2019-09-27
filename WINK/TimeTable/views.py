@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 
@@ -35,21 +35,23 @@ def Login(request):
     driver.execute_script("document.getElementsByName('txt_passwd')[0].value=\'" + pw + "\'")
     # time.sleep(1)
 
-    driver.find_element_by_xpath(
-        '/html/body/form[1]/table/tbody/tr/td/table/tbody/tr[4]/td[1]/table/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/input').click()
+    driver.find_element_by_xpath('/html/body/form[1]/table/tbody/tr/td/table/tbody/tr[4]/td[1]/table/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/input').click()
     driver.implicitly_wait(3)
 
     driver.get('https://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do')
-    html = driver.page_source
+    try:
+        html = driver.page_source
 
-    soup = BeautifulSoup(html, 'html.parser')
-    soup.prettify(formatter=lambda s: s.replace('&nbsp', ''))
-    notices = soup.findAll('td', attrs={'rowspan': '2'})
-    notices2 = soup.findAll('td', attrs={'rowspan': '3'})
+        soup = BeautifulSoup(html, 'html.parser')
+        soup.prettify(formatter=lambda s: s.replace('&nbsp', ''))
+        notices = soup.findAll('td', attrs={'rowspan': '2'})
+        notices2 = soup.findAll('td', attrs={'rowspan': '3'})
+        for n in notices:
+            print(n.text)
 
-    for n in notices:
-        print(n.text)
+        # for n in notices2:
+        #     print(n.text)
+        return HttpResponseRedirect('/admin')
+    except:
+        return HttpResponse(request)
 
-    # for n in notices2:
-    #     print(n.text)
-    return HttpResponse(request)
