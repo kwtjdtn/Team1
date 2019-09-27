@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>TimeTable1</title>
+    <div id="page-wrapper">
+        <header id="main-header">
+            <h4 class="master-title">TimeTable1 by WINK</h4>
+        </header>
+        <nav id="main-navigation">
+            <div>
+                <ul class="main-menu">
+                    <li class="main-menu-item"><a href="#">Main</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div id="content">
+            <section id="main-section">
+                <form id="login form" method="post" action="logincheck/">>
+                    {% csrf_token %}
+                    <label>ID</label><input type="text" name="id">
+                    <label>password</label> <input type="password" name="pw">
+                    <input id="btn" type="submit" value="로그인" />
+                </form>
+            </section>
+
+            <aside id="main-aside">
+            </aside>
+        </div>
+        <footer id="main-footer">
+            <p>created by SungsooKim, YeonsooKim</p>
+        </footer>
+    </div>
+</head>
+<body>
+
+</body>
+</html>
