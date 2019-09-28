@@ -33,8 +33,8 @@ def Login(request):
 
     driver.get('https://ktis.kookmin.ac.kr/')
     driver.implicitly_wait(3)
-    id = request.POST['userID']
-    pw = request.POST['userPW']
+    id = request.POST['id']
+    pw = request.POST['pw']
     driver.execute_script("document.getElementsByName('txt_user_id')[0].value=\'" + id + "\'")
     # time.sleep(1)
     driver.execute_script("document.getElementsByName('txt_passwd')[0].value=\'" + pw + "\'")
