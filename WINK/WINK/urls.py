@@ -20,7 +20,9 @@ from django.conf.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('timetable/', include('TimeTable.urls')),
+
+    path('', include('main.urls')),
+    path('timetable/', include('timetable.urls')),
     path('login/', include('login.urls')),
 ]
 

@@ -59,7 +59,7 @@ def Login(request):
         #     print(n.text)
         return HttpResponseRedirect('/admin')
     except:
-        return request
+        return HttpResponseRedirect('/login/')
 
 
 
