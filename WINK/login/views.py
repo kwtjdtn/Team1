@@ -13,12 +13,12 @@ def index(request):
 
 
 
-#######chrome ?�정
+#######chrome option
 path = 'C:/chromedriver.exe'  # ex. C:/downloads/chromedriver.exe
 options = webdriver.ChromeOptions()
 options.add_argument('headless')
 driver = webdriver.Chrome(path, chrome_options=options)
-###############?�롬 ?�정 ?�료
+###############chrome option end
 
 
 
@@ -28,13 +28,13 @@ def Login(request):
     #print(request.POST['pw'])
 
 
-    # 조금�?기다리면 selenium?�로 ?�어?????�는 브라?��? ?�창???�다
+    # 조금�?기다리면 selenium?�로 ?�어?????�는 브라?��? ?�창???�다
 
 
     driver.get('https://ktis.kookmin.ac.kr/')
     driver.implicitly_wait(3)
-    id = request.POST['id']
-    pw = request.POST['pw']
+    id = request.POST['userID']
+    pw = request.POST['userPW']
     driver.execute_script("document.getElementsByName('txt_user_id')[0].value=\'" + id + "\'")
     # time.sleep(1)
     driver.execute_script("document.getElementsByName('txt_passwd')[0].value=\'" + pw + "\'")
@@ -59,7 +59,7 @@ def Login(request):
         #     print(n.text)
         return HttpResponseRedirect('/admin')
     except:
-        return
+        return request
 
 
 

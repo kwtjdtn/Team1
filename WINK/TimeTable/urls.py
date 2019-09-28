@@ -8,5 +8,5 @@ from TimeTable import views
 
 urlpatterns = [
     path('', views.index),
-    path('logincheck/', views.Login),
+
 ]
