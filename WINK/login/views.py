@@ -1,3 +1,5 @@
+
+# Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, render_to_response
 
@@ -5,6 +7,10 @@ from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from selenium import webdriver
 from bs4 import BeautifulSoup
+
+def index(request):
+    return render(request,'login/wink.html')
+
 
 
 #######chrome 설정
@@ -15,8 +21,7 @@ driver = webdriver.Chrome(path, chrome_options=options)
 ###############크롬 설정 완료
 
 
-def index(request):
-    return render(request,'wink.html')
+
 
 def Login(request):
     #print(request.POST['id'])
