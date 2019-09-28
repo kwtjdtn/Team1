@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 
 
 #######chrome 설정
-path = 'C:/workSpace/PythonProject/WINK/Team1/chromedriver.exe'  # ex. C:/downloads/chromedriver.exe
+path = 'C:/chromedriver.exe'  # ex. C:/downloads/chromedriver.exe
 options = webdriver.ChromeOptions()
 options.add_argument('headless')
 driver = webdriver.Chrome(path, chrome_options=options)
