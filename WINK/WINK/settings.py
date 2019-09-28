@@ -41,7 +41,7 @@ INSTALLED_APPS = [
 
     'main',
     'login',
-    'timetable',
+    'TimeTable',
 ]
 
 MIDDLEWARE = [

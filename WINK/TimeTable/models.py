@@ -5,7 +5,8 @@ from django.db import models
 
 
 class TimeTable(models.Model):
-    student_code = models.CharField(max_length=8,unique=True)
+    student_code = models.CharField(max_length=8)
+    day = models.CharField(max_length=3,null=True,blank=True)
     table09_00 = models.CharField(max_length=50,null=True,blank=True)
     table09_30 = models.CharField(max_length=50,null=True,blank=True)
     table10_00 = models.CharField(max_length=50,null=True,blank=True)
