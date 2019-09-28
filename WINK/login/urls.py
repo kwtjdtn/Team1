@@ -8,5 +8,5 @@ from login import views
 
 urlpatterns = [
     path('', views.index),
-    path('logincheck',views.Login)
+    path('logincheck/',views.Login)
 ]

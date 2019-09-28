@@ -63,23 +63,22 @@
                                         <div class="col-sm-3">
                                         </div>
                                         <div class="col-sm-6">
-                                            <div class="form-group">
-                                                <label>ID <small>(required)</small></label>
-                                                <input name="id" type="text" class="form-control" placeholder="ID">
-                                                <div class="form-group">
-                                                    <label>PASSWORD <small>(required)</small></label>
-                                                    <input name="password" type="password" class="form-control" placeholder="****">
-                                                </div>
-                                            </div>
-                                            <div class="wizard-footer height-wizard">
-                                                <form id="login form" method="post" action="logincheck/">
-                                                    <div class="pull-right">
-                                                        <input type='button' class='btn btn-finish btn-fill btn-warning btn-wd btn-sm' name='login' value='LOGIN' />
+                                            <form id="login form" method="post" action="logincheck/">
+                                                {% csrf_token %}
+                                                <div>
+                                                    <label>ID <small>(required)</small></label>
+                                                    <input id="userID" type="text" class="form-control" placeholder="ID">
+                                                    <div class="form-group">
+                                                        <label>PASSWORD <small>(required)</small></label>
+                                                        <input id="userPW" type="password" class="form-control" placeholder="****">
                                                     </div>
-                                                </form>
-                                                <div class="clearfix">
                                                 </div>
-                                            </div>
+                                                <div class="wizard-footer height-wizard">
+                                                    <div class="pull-right">
+                                                        <input type='submit' id='login' value='LOGIN' />
+                                                    </div>
+                                                </div>
+                                            </form>                                                                                   
                                         </div>
                                     </div>
                                 </div>

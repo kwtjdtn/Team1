@@ -13,12 +13,12 @@ def index(request):
 
 
 
-#######chrome 설정
+#######chrome ?�정
 path = 'C:/chromedriver.exe'  # ex. C:/downloads/chromedriver.exe
 options = webdriver.ChromeOptions()
 options.add_argument('headless')
 driver = webdriver.Chrome(path, chrome_options=options)
-###############크롬 설정 완료
+###############?�롬 ?�정 ?�료
 
 
 
@@ -28,7 +28,7 @@ def Login(request):
     #print(request.POST['pw'])
 
 
-    # 조금만 기다리면 selenium으로 제어할 수 있는 브라우저 새창이 뜬다
+    # 조금�?기다리면 selenium?�로 ?�어?????�는 브라?��? ?�창???�다
 
 
     driver.get('https://ktis.kookmin.ac.kr/')
