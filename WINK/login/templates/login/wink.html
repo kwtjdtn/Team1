@@ -29,19 +29,21 @@
         <!--   Big container   -->
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-8 col-sm-offset-2">
-                    <div id="layer_fixed">
-                        <div class="pull-left logo-contatiner">
-                            <div class="logo">
-                                <a href="wink.html">
-                                    <img src="{% static 'login/assets/img/wink.png' %}" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-sm-8 col-sm-offset-2">                    
                     <!--      Wizard container        -->
                     <div class="wizard-container">
-
+                        <div id="layer_fixed">
+                            <div>
+                                <input type='button' class='pull-right btn btn-finish btn-fill btn-warning btn-wd btn-sm' name='login' value='LOGIN' onClick="location.href='wink.html'" />
+                            </div>
+                            <span class="logo-contatiner" style='display:table; margin-left:auto; margin-right:auto;'>
+                                <div class="logo">
+                                    <a href="wink.html">
+                                        <img src="assets/img/wink.png" />
+                                    </a>
+                                </div>
+                            </span>
+                        </div>
                         <div class="card wizard-card" data-color="orange" id="wizardProfile">
                             <!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
 
