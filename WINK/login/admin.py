@@ -1,6 +1,6 @@
 from django.contrib import admin
 
 # Register your models here.
-from login.models import LoginTest
+from login.models import UserScheduleDB
 
-admin.site.register(LoginTest)
+admin.site.register(UserScheduleDB)

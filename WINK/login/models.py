@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-class LoginTest(models.Model):
+class UserScheduleDB(models.Model):
     student_code=models.CharField(max_length=8,blank=True)
     time = models.CharField(max_length=50,blank=True)
     A = models.CharField(max_length=50,blank=True)

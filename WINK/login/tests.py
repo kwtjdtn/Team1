@@ -4,9 +4,8 @@ from django.test import TestCase
 from selenium import webdriver
 from bs4 import BeautifulSoup
 
-
 #######chrome option
-from login.models import LoginTest
+from login.models import UserScheduleDB
 
 path = 'C:/chromedriver.exe'  # ex. C:/downloads/chromedriver.exe
 options = webdriver.ChromeOptions()
@@ -95,7 +94,7 @@ for i in result:
 
 
 
-                dbInstance = LoginTest(student_code='20153159', time=dataA, A=dataB, B=dataC, C=dataD, D=dataE, E=dataF,F=dataG)
+                dbInstance = UserScheduleDB(student_code='20153159', time=dataA, A=dataB, B=dataC, C=dataD, D=dataE, E=dataF,F=dataG)
                 dbInstance.save()
 
 
@@ -135,7 +134,7 @@ for i in result:
                 print(dataF)
                 print(dataG)
                 #print(dataA + dataB + dataC + dataD + dataE + dataF)
-                dbInstance = LoginTest(student_code='20153159', time=dataA, A=dataB, B=dataC, C=dataD, D=dataE, E=dataF, F=dataG)
+                dbInstance = UserScheduleDB(student_code='20153159', time=dataA, A=dataB, B=dataC, C=dataD, D=dataE, E=dataF, F=dataG)
                 dbInstance.save()
             #print(word)
             word=''
