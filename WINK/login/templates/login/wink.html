@@ -20,6 +20,18 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{% static 'login/assets/css/demo.css' %}" rel="stylesheet" />
+    <style type="text/css">
+        #layer_fixed {
+            height: 35px;
+            width: 100%;
+            color: #555;
+            font-size: 12px;
+            position: fixed;
+            z-index: 999;
+            top: 0px;
+            right: 0px;
+        }
+    </style>
 </head>
 
 <body>
@@ -27,21 +39,22 @@
         <!--   Creative Tim Branding   -->
     </div>
     <div class="logo-container">
+        <div id="layer_fixed">
+            <div class="logo-contatiner" style='display:table; margin-left:auto; margin-right:auto;'>
+                <div class="logo">
+                    <a href="wink_main.html">
+                        <img src="{% static 'login/assets/img/wink.png' %}" />
+                    </a>
+                </div>
+            </div>
+        </div>
         <!--   Big container   -->
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
                     <!--      Wizard container        -->
                     <div class="wizard-container">
-                        <div id="layer_fixed">
-                            <div class="logo-contatiner" style='display:table; margin-left:auto; margin-right:auto;'>
-                                <div class="logo">
-                                    <a href="WINK_MAIN.html">
-                                        <img src="{% static 'login/assets/img/wink.png' %}" />
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="card wizard-card" data-color="orange" id="wizardProfile">
                             <!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
 
@@ -95,7 +108,7 @@
 
         <div class="footer">
             <div class="container">
-                Made with <i class="fa fa-heart heart"></i> by Creative Kim</a>
+                Made with <i class="fa fa-heart heart"></i> by WINK</a>
             </div>
         </div>
 

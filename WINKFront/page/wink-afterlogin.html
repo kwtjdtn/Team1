@@ -51,7 +51,7 @@
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2">
                         <!--      Wizard container        -->
-                        <div class="wizard-container">
+                        <div class="wizard-container" style="float:none; margin:0 auto">
 
                             <div class="card wizard-card" data-color="orange" id="wizardProfile">
                                 <form action="logincheck/" method="post">
@@ -59,37 +59,65 @@
 
                                     <div class="wizard-header">
                                         <h3>
-                                            <b>LOGIN</b> YOUR ID <br>
+                                            <b>WINK</b> TimeTable <br>
                                             <small>Check your Timetable.</small>
                                         </h3>
                                     </div>
 
                                     <div class="wizard-navigation">
                                         <ul>
-                                            <li><a href="#login" data-toggle="tab">LOGIN</a></li>
+                                            <li><a href="#Timetable" data-toggle="tab">Timetable</a></li>
+                                            <li><a href="#community" data-toggle="tab">Community</a></li>
+                                            <li><a href="#Lotto" data-toggle="tab">Lotto</a></li>
                                         </ul>
-
-                                    </div>
-                                    <div class="tab-content">
-                                        <div class="tab-pane" id="login">
-                                            <div class="row">
-                                                <h4 class="info-text"> 로그인 후 당신의 시간표를 확인해보세요.</h4>
-                                                <div class="col-sm-3">
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>ID <small>(required)</small></label>
-                                                        <input name="id" type="text" class="form-control" placeholder="ID">
+                                        <div class="tab-content">
+                                            <div class="tab-pane" id="Timetable">
+                                                <div class="row">
+                                                    <h4 class="info-text"> Check your timetable</h4>
+                                                    <div class="col-sm-3">
+                                                    </div>
+                                                    <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            <label>PASSWORD <small>(required)</small></label>
-                                                            <input name="password" type="password" class="form-control" placeholder="****">
+                                                            <input type="button" class="form-control big-btn btn-fill btn-warning" name='text' value="내 시간표 확인하기" onClick="location.href='wink_timetable.html'">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <input type="button" class="form-control big-btn btn-fill btn-primary" name='text1' value='공강 시간표 찾기' onclick="location.href='#'" />
+                                                        </div>
+                                                        <div class="wizard-footer height-wizard">
+                                                            <div class="pull-right">
+                                                            </div>
+                                                            <div class="clearfix">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="wizard-footer height-wizard">
-                                                        <div class="pull-right">
-                                                            <input type='button' class='btn btn-finish btn-fill btn-warning btn-wd btn-sm' name='login' value='LOGIN' />
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="community">
+                                                <div class="row">
+                                                    <h4 class="info-text">아직 서비스를 이용 할 수 없습니다.</h4>
+                                                    <div class="col-sm-3">
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="wizard-footer height-wizard">
+                                                            <div class="pull-right">
+                                                            </div>
+                                                            <div class="clearfix">
+                                                            </div>
                                                         </div>
-                                                        <div class="clearfix">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="Lotto">
+                                                <div class="row">
+                                                    <h4 class="info-text">로또는 중독입니다.</h4>
+                                                    <div class="col-sm-3">
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="wizard-footer height-wizard">
+                                                            <div class="pull-right">
+                                                            </div>
+                                                            <div class="clearfix">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -108,9 +136,9 @@
                     Made with <i class="fa fa-heart heart"></i> by WINK</a>
                 </div>
             </div>
-
         </div>
     </div>
+
 </body>
 
 <!--   Core JS Files   -->
