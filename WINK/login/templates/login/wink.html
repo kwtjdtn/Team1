@@ -34,7 +34,7 @@
             </div>
         </div>
         <!--   Big container   -->
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-8 col-sm-offset-2">
 
@@ -64,19 +64,22 @@
                                         <div class="col-sm-3">
                                         </div>
                                         <div class="col-sm-6">
-                                            <form id="login form" method="post" action="logincheck/">
+                                            <form class="form-horizontal" role="form" id="login form" method="post" action="logincheck/">
                                                 {% csrf_token %}
-                                                <div>
-                                                    <label>userID <small>(required)</small></label>
-                                                    <input name="id" type="text" placeholder="ID">
-                                                    <div class="form-group">
-                                                        <label>userPW <small>(required)</small></label>
-                                                        <input name="pw" type="password" placeholder="****">
-
-                                                        <input type='submit' id='login' value='LOGIN' />
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">ID <small>(aksed) </small></label> 
+                                                    <div class="col-sm-10">
+                                                        <input name="id" type="text" class="form-control" placeholder="ID">
                                                     </div>
                                                 </div>
-                                                <div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">PW <small>(aksed)</small></label> 
+                                                    <div class="col-sm-10">
+                                                        <input name="pw" type="password" class="form-control" placeholder="****">
+                                                    </div>
+                                                    </div>
+                                                <div class="form-group col-sm-6 pull-right">
+                                                    <input type='submit' id='login' class="btn btn-warning form-control" value='LOGIN' />
                                                 </div>
                                             </form>
                                         </div>
