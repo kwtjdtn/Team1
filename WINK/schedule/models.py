@@ -2,9 +2,7 @@ from django.db import models
 
 # Create your models here.
 
-
-
-class TimeTable(models.Model):
+class Schedule(models.Model):
     student_code = models.CharField(max_length=8)
     day = models.CharField(max_length=3,null=True,blank=True)
     table09_00 = models.CharField(max_length=50,null=True,blank=True)
