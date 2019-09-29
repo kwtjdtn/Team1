@@ -19,6 +19,18 @@
 
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="assets/css/demo.css" rel="stylesheet" />
+    <style type="text/css">
+        #layer_fixed {
+            height: 35px;
+            width: 100%;
+            color: #555;
+            font-size: 12px;
+            position: fixed;
+            z-index: 999;
+            top: 0px;
+            right: 0px;
+        }
+    </style>
 </head>
 
 <body>
@@ -30,7 +42,7 @@
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-2">
                         <!--      Wizard container        -->
-                        <div class="wizard-container">
+                        <div class="wizard-container" style="float:none; margin:0 auto">
                             <div id="layer_fixed">
                                 <div>
                                     <input type='button' class='pull-right btn btn-finish btn-fill btn-warning btn-wd btn-sm' name='login' value='LOGIN' onClick="location.href='wink.html'" />
@@ -49,37 +61,53 @@
 
                                     <div class="wizard-header">
                                         <h3>
-                                            <b>LOGIN</b> YOUR ID <br>
+                                            <b>WINK</b> TimeTable <br>
                                             <small>Check your Timetable.</small>
                                         </h3>
                                     </div>
 
                                     <div class="wizard-navigation">
                                         <ul>
-                                            <li><a href="#about" data-toggle="tab">LOGIN</a></li>
+                                            <li><a href="#Timetable" data-toggle="tab">Timetable</a></li>
+                                            <li><a href="#community" data-toggle="tab">Community</a></li>
+                                            <li><a href="#Lotto" data-toggle="tab">Lotto</a></li>
                                         </ul>
-
-                                    </div>
-                                    <div class="tab-content">
-                                        <div class="tab-pane" id="about">
-                                            <div class="row">
-                                                <h4 class="info-text"> 로그인 후 당신의 시간표를 확인해보세요.</h4>
-                                                <div class="col-sm-3">
-                                                </div>
-                                                <div class="col-sm-6">
-                                                    <div class="form-group">
-                                                        <label>ID <small>(required)</small></label>
-                                                        <input name="id" type="text" class="form-control" placeholder="ID">
+                                        <div class="tab-content">
+                                            <div class="tab-pane" id="Timetable">
+                                                <div class="row">
+                                                    <h4 class="info-text"> Check your timetable</h4>
+                                                    <div class="col-sm-3">
+                                                    </div>
+                                                    <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            <label>PASSWORD <small>(required)</small></label>
-                                                            <input name="password" type="password" class="form-control" placeholder="****">
+                                                            <label>ID <small>(required)</small></label>
+                                                            <input name="but" type="button" class="big-btn btn-finish btn-fill btn-warning form-control" value="button">
+                                                            <div class="form-group">
+                                                                <label>PASSWORD <small>(required)</small></label>
+                                                                <input name="password" type="password" class="form-control" placeholder="****">
+                                                                <input type="button" class="big-btn btn-finish btn-fill btn-warning" name='text'value="button" style="display:inline">
+                                                            </div>
+                                                        </div>
+                                                        <div class="wizard-footer height-wizard">
+                                                            <div class="pull-right">
+                                                            </div>
+                                                            <div class="clearfix">
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <div class="wizard-footer height-wizard">
-                                                        <div class="pull-right">
-                                                            <input type='button' class='btn btn-finish btn-fill btn-warning btn-wd btn-sm' name='login' value='LOGIN' />
-                                                        </div>
-                                                        <div class="clearfix">
+                                                </div>
+                                            </div>
+                                            <div class="tab-pane" id="community">
+                                                <div class="row">
+                                                    <h4 class="info-text"> Check your timetable</h4>
+                                                    <div class="col-sm-3">
+                                                    </div>
+                                                    <div class="col-sm-6">
+                                                        <div class="wizard-footer height-wizard">
+                                                            <div class="pull-right">
+                                                            </div>
+                                                            <div class="clearfix">
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -101,6 +129,7 @@
 
         </div>
     </div>
+
 </body>
 
 <!--   Core JS Files   -->
