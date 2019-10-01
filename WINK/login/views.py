@@ -1,3 +1,4 @@
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.test import TestCase
@@ -11,8 +12,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 
 from login.serializers import UserScheduleSerializers
-from .models import UserScheduleDB
-
+import json
 
 class Creater(CreateAPIView):
     def post(self,request,format=None):
@@ -26,7 +26,14 @@ class Creater(CreateAPIView):
 def create(request, format=None):
     if request.method == 'GET':
         data = UserScheduleDB.objects.all()
-        serializer = UserScheduleSerializers(data,many=True)
+        key = '20153159'
+        #key= data.filter(student_code='20153159')[0]
+        #print(str(key)[0:8])
+        serializer = UserScheduleSerializers(data.filter(student_code = key),many=True)
+
+        #result = json.dumps({str(key)[0:8] : serializer.data}, ensure_ascii=False)
+        #print(result)
+
         return Response(serializer.data)
     elif request.method == 'POST':
         serializer = UserScheduleSerializers(data=request.data)
