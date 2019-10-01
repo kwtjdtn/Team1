@@ -6,7 +6,7 @@ class UserScheduleSerializers(serializers.ModelSerializer):
 
     class Meta:
         model = UserScheduleDB
-        fields = ('student_code', 'time', 'A', 'B', 'C', 'D', 'E', 'F')
+        fields = ('id','student_code', 'time', 'A', 'B', 'C', 'D', 'E', 'F')
 
     def create(self, data):
         return UserScheduleDB.objects.create(**data)
