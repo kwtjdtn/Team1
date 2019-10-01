@@ -13,8 +13,8 @@ def create(request):
         data = UserScheduleDB.objects.all()
         key = request.query_params.get('student_code')
         serializer = UserScheduleSerializers(data.filter(student_code = key), many=True)
-
         return JsonResponse({'data' : serializer.data})
+    
     elif request.method == 'POST':
         serializer = UserScheduleSerializers(data=request.data)
         print(request.data)
