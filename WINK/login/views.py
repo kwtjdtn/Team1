@@ -21,7 +21,7 @@ driver = webdriver.Chrome(path, chrome_options=options)
 def Login(request):
     #####check having data
     model_instance = UserScheduleDB.objects.all()
-    model_instance = model_instance.filter(student_code='20153159')
+    model_instance = model_instance.filter(student_code=request.POST['id'])
     queryset = len(str(model_instance))
 
 
@@ -50,7 +50,7 @@ def Login(request):
             #     print(n.text)
             result = ""
             for n in notices2:
-                print(n.text)
+                #print(n.text)
                 result += n.text
 
             blank = result[0]
@@ -67,8 +67,7 @@ def Login(request):
             dataD = ''
             dataE = ''
             dataF = ''
-            dataG = ''
-            dataH = ''
+
             for i in result:
                 if i != '#':
                     word += i
@@ -105,7 +104,7 @@ def Login(request):
                             print(dataF)
                             print(dataG)
 
-                            dbInstance = UserScheduleDB(student_code='20153159', time=dataA, A=dataB, B=dataC, C=dataD,
+                            dbInstance = UserScheduleDB(student_code=request.POST['id'], time=dataA, A=dataB, B=dataC, C=dataD,
                                                         D=dataE,
                                                         E=dataF, F=dataG)
                             dbInstance.save()
@@ -144,20 +143,20 @@ def Login(request):
                             print(dataF)
                             print(dataG)
                             # print(dataA + dataB + dataC + dataD + dataE + dataF)
-                            dbInstance = UserScheduleDB(student_code='20153159', time=dataA, A=dataB, B=dataC, C=dataD,
+                            dbInstance = UserScheduleDB(student_code=request.POST['id'], time=dataA, A=dataB, B=dataC, C=dataD,
                                                         D=dataE,
                                                         E=dataF, F=dataG)
                             dbInstance.save()
                         # print(word)
                         word = ''
-            return HttpResponseRedirect('/admin/')
+            return render(request,'login/wink_afterlogin.html')
         except:
             return HttpResponseRedirect('/login/')
 
 
     ##not first login
     else:
-        return HttpResponseRedirect('/admin/')
+        return render(request,'login/wink_afterlogin.html')
 
 
 

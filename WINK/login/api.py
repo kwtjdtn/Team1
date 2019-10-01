@@ -12,13 +12,16 @@ def create(request):
     if request.method == 'GET':
         data = UserScheduleDB.objects.all()
         key = request.query_params.get('student_code')
-        serializer = UserScheduleSerializers(data.filter(student_code = key), many=True)
-
+        serializer = UserScheduleSerializers(data.filter(student_code=key), many=True)
         return JsonResponse({'data' : serializer.data})
+    
     elif request.method == 'POST':
+        #print(request.data)
+
         serializer = UserScheduleSerializers(data=request.data)
-        print(request.data)
+        print(serializer)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        #return JsonResponse(request.data)
