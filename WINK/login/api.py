@@ -10,11 +10,14 @@ from rest_framework.response import Response
 @api_view(['GET', 'POST'])
 def create(request):
     if request.method == 'GET':
-        data = UserScheduleDB.objects.all()
-        key = request.query_params.get('student_code')
-        serializer = UserScheduleSerializers(data.filter(student_code=key), many=True)
-        return JsonResponse({'data' : serializer.data})
-    
+
+        print(request.headers.get('Authorization'))
+        if(request.headers.get('Authorization')=='Basic d2luazp3aW5r'):
+            data = UserScheduleDB.objects.all()
+            key = request.query_params.get('student_code')
+            serializer = UserScheduleSerializers(data.filter(student_code=key), many=True)
+            return JsonResponse({'data' : serializer.data})
+        return Response(status=status.HTTP_401_UNAUTHORIZED)
     elif request.method == 'POST':
         #print(request.data)
 
