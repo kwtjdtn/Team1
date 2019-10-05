@@ -7,7 +7,7 @@ from django.shortcuts import render
 
 from selenium import webdriver
 from bs4 import BeautifulSoup
-
+from django.contrib import messages
 
 def index(request):
     return render(request, 'login/wink.html')
@@ -168,8 +168,8 @@ def Login(request):
             return HttpResponseRedirect('/login/afterlogin/')
     except:     #login fail
         #print('false')
-        return HttpResponseRedirect('/login/')
-    return HttpResponseRedirect('')
+        return HttpResponseRedirect('/login/', messages.error(request, 'false'))
+
 
 
 
