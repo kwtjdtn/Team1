@@ -15,3 +15,4 @@ class UserScheduleDB(models.Model):
 
     def __str__(self):
         return '{} : {}'.format(self.student_code, self.time)
+
