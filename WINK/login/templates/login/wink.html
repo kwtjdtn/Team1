@@ -35,17 +35,6 @@
 </head>
 
 <body>
-    {% if messages %}
-        {% for message in messages %}
-            {% if message.tags == 'error'%}
-                <div id="message" title="Some Flag">
-                    <script type="text/javascript">
-                        alert('ID,PW 불일치');
-                    </script>
-                </div>
-            {% endif %}
-        {% endfor %}
-    {% endif %}
     <div class="image-container set-full-height">
         <!--   Creative Tim Branding   -->
     </div>
@@ -88,6 +77,14 @@
                                         <h4 class="info-text"> 로그인 후 당신의 시간표를 확인해보세요.</h4>
                                         <div class="col-sm-3">
                                         </div>
+                                            <div id="message" title="Some Flag">
+                                                <script type="text/javascript">
+                                                    var hw = document.getElenmentById('false');
+                                                    hw.addEventListener('clilck', function () {
+                                                        alert("ID,PW 불일치");
+                                                    }
+                                                 </script>
+                                            </div>
                                         <div class="col-sm-6">
                                             <form class="form-horizontal" role="form" id="login form" method="post" action="logincheck/">
                                                 {% csrf_token %}
