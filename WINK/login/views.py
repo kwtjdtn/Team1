@@ -23,6 +23,23 @@ options = webdriver.ChromeOptions()
 options.add_argument('headless')
 driver = webdriver.Chrome(path, chrome_options=options)
 ###############chrome option end
+
+def logincheck(id, pw):
+    driver.get('https://ktis.kookmin.ac.kr/')
+    driver.implicitly_wait(3)
+    inid = id
+    inpw = pw
+    driver.execute_script("document.getElementsByName('txt_user_id')[0].value=\'" + inid + "\'")
+    # time.sleep(1)
+    driver.execute_script("document.getElementsByName('txt_passwd')[0].value=\'" + inpw + "\'")
+    # time.sleep(1)
+
+    driver.find_element_by_xpath(
+        '/html/body/form[1]/table/tbody/tr/td/table/tbody/tr[4]/td[1]/table/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/input').click()
+    driver.implicitly_wait(3)
+    driver.get('https://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do')
+
+
 def Login(request):
     # id=request.POST['id']
     # pw=request.POST['pw']
@@ -33,20 +50,20 @@ def Login(request):
     #     userInfo.save()
 
     try:    #try login
-        driver.get('https://ktis.kookmin.ac.kr/')
-        driver.implicitly_wait(3)
+        # driver.get('https://ktis.kookmin.ac.kr/')
+        # driver.implicitly_wait(3)
         id = request.POST['id']
         pw = request.POST['pw']
-        driver.execute_script("document.getElementsByName('txt_user_id')[0].value=\'" + id + "\'")
-        # time.sleep(1)
-        driver.execute_script("document.getElementsByName('txt_passwd')[0].value=\'" + pw + "\'")
-        # time.sleep(1)
-
-        driver.find_element_by_xpath(
-            '/html/body/form[1]/table/tbody/tr/td/table/tbody/tr[4]/td[1]/table/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/input').click()
-        driver.implicitly_wait(3)
-        driver.get('https://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do')
-
+        # driver.execute_script("document.getElementsByName('txt_user_id')[0].value=\'" + id + "\'")
+        # # time.sleep(1)
+        # driver.execute_script("document.getElementsByName('txt_passwd')[0].value=\'" + pw + "\'")
+        # # time.sleep(1)
+        #
+        # driver.find_element_by_xpath(
+        #     '/html/body/form[1]/table/tbody/tr/td/table/tbody/tr[4]/td[1]/table/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/input').click()
+        # driver.implicitly_wait(3)
+        # driver.get('https://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do')
+        logincheck(id, pw)
 
         userSchdule = UserScheduleDB.objects.all()
         userSchdule = userSchdule.filter(student_code=id)

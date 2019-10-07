@@ -8,4 +8,5 @@ urlpatterns = [
     path('logincheck/',views.Login),
     path('afterlogin/',views.afterLogin),
     path('api/',api.create),
+    path('api/logincheck/', api.logincheck)
 ]
