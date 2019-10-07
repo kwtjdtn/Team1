@@ -1,5 +1,6 @@
 from django.http import JsonResponse
 
+from login import views
 from login.models import UserScheduleDB
 from login.serializers import UserScheduleSerializers
 from rest_framework import status
@@ -28,3 +29,14 @@ def create(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         #return JsonResponse(request.data)
+
+@api_view(['GET'])
+def logincheck(request):
+    if request.method == 'GET':
+        try:
+            #views.logincheck(request.POST['id'], request.POST['pw'])
+            print(request.data.get('id'))
+            views.logincheck(request.data.get('id'), request.data.get('pw'))
+            return JsonResponse({'LOGIN' : 'SUCCESS'})
+        except:
+            return JsonResponse({'LOGIN' : 'FAIL'})
