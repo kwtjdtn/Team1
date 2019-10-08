@@ -1,13 +1,11 @@
-from _overlapped import NULL
-
-from django.http import HttpResponseRedirect
-from django.shortcuts import render
-
-# Create your tests here.
-
-from selenium import webdriver
 from bs4 import BeautifulSoup
 from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from selenium import webdriver
+
+
+# Create your tests here.
 
 def index(request):
     return render(request, 'login/wink.html')
