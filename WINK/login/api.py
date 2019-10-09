@@ -1,10 +1,14 @@
+from django.contrib.auth import authenticate
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import AllowAny
 
 from login import views
 from login.models import UserScheduleDB
 from login.serializers import UserScheduleSerializers
 from rest_framework import status
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
 
@@ -31,12 +35,17 @@ def create(request):
         #return JsonResponse(request.data)
 
 @api_view(['GET'])
+@csrf_exempt
+@permission_classes((AllowAny,))
 def logincheck(request):
     if request.method == 'GET':
         try:
-            #views.logincheck(request.POST['id'], request.POST['pw'])
-            print(request.data.get('id'))
-            views.logincheck(request.data.get('id'), request.data.get('pw'))
+            id=request.data.get('id')
+            pw=request.data.get('pw')
+            user = authenticate(username=id, password=pw)
+            print(user)
+            views.logincheck(id, pw)
+            token, created = Token.objects.get_or_create(user=user)
             return JsonResponse({'LOGIN' : 'SUCCESS'})
         except:
             return JsonResponse({'LOGIN' : 'FAIL'})
