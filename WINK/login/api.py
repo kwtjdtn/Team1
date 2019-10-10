@@ -1,17 +1,16 @@
-from django.contrib.auth import authenticate
+import random
+import string
+
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from rest_framework.authtoken.models import Token
+from rest_framework import status
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
+from rest_framework.response import Response
 
 from login import views
 from login.models import UserScheduleDB
 from login.serializers import UserScheduleSerializers
-from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.response import Response
-
-from userinfo.models import User
 
 
 @api_view(['GET', 'POST'])
@@ -47,15 +46,34 @@ def logincheck(request):
 
             views.logincheck(id, pw)
 
-            userinfo = User.objects.all()
-            userinfo = userinfo.filter(name='20153159', password = 'rhrnak2628!')
-            save_session(request, id, pw)
-            print(request.session.id)
-            #token, created = Token.objects.get_or_create(user=user)
-            return JsonResponse({'LOGIN' : 'SUCCESS'})
+            _LENGTH = 500  # N자리
+
+            # 숫자 + 대소문자
+            string_pool = string.ascii_letters + string.digits
+
+            # 랜덤한 문자열 생성
+            token = ""
+            for i in range(_LENGTH):
+                token += random.choice(string_pool)  # 랜덤한 문자열 하나 선택
+            #print(token)
+            save_session(request, id, pw, token)
+            #print(request.session.get(token, False))
+
+
+
+
+            return JsonResponse({'TOKEN' : token})
         except:
             return JsonResponse({'LOGIN' : 'FAIL'})
 
-def save_session(request, id, pw):
-    request.session['id']=id
-    request.session['pw']=pw
+def save_session(request, id, pw, token):
+    request.session[token]={'userinfo':[id, pw]}
+    print('save session')
+
+@api_view(['GET'])
+def get_user_info(request):
+    if request.method == 'GET':
+        data =request.headers.get('Authorization')
+        data = data[7:]
+        print(data)
+        return Response(request.session.get(data, False))
