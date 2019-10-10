@@ -11,6 +11,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
+from userinfo.models import User
+
 
 @api_view(['GET', 'POST'])
 def create(request):
@@ -45,9 +47,15 @@ def logincheck(request):
 
             views.logincheck(id, pw)
 
-            user = authenticate(name=id, password=pw)
-            print(user)
+            userinfo = User.objects.all()
+            userinfo = userinfo.filter(name='20153159', password = 'rhrnak2628!')
+            save_session(request, id, pw)
+            print(request.session.id)
             #token, created = Token.objects.get_or_create(user=user)
             return JsonResponse({'LOGIN' : 'SUCCESS'})
         except:
             return JsonResponse({'LOGIN' : 'FAIL'})
+
+def save_session(request, id, pw):
+    request.session['id']=id
+    request.session['pw']=pw
