@@ -42,10 +42,12 @@ def logincheck(request):
         try:
             id=request.data.get('id')
             pw=request.data.get('pw')
-            user = authenticate(username=id, password=pw)
-            print(user)
+
             views.logincheck(id, pw)
-            token, created = Token.objects.get_or_create(user=user)
+
+            user = authenticate(name=id, password=pw)
+            print(user)
+            #token, created = Token.objects.get_or_create(user=user)
             return JsonResponse({'LOGIN' : 'SUCCESS'})
         except:
             return JsonResponse({'LOGIN' : 'FAIL'})

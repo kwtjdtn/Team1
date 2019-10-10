@@ -29,6 +29,8 @@ class UserManager(BaseUserManager):
         user.is_admin = True
         user.is_staff = True
         user.is_superuser = True
+        user.set_password(password)
+
         user.save(using=self._db)
         return user
 
@@ -52,4 +54,5 @@ class User(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'name'
 
     def __str__(self):
-        return str(self.id)
+        #return str(self.id)
+        return str(self.name)

@@ -6,6 +6,8 @@ from selenium import webdriver
 
 
 # Create your tests here.
+from userinfo.models import User
+
 
 def index(request):
     return render(request, 'login/wink.html')
@@ -25,19 +27,22 @@ driver = webdriver.Chrome(path, chrome_options=options)
 def logincheck(id, pw):
     driver.get('https://ktis.kookmin.ac.kr/')
     driver.implicitly_wait(3)
-    inid = id
-    inpw = pw
-    driver.execute_script("document.getElementsByName('txt_user_id')[0].value=\'" + inid + "\'")
+    driver.execute_script("document.getElementsByName('txt_user_id')[0].value=\'" + id + "\'")
     # time.sleep(1)
-    driver.execute_script("document.getElementsByName('txt_passwd')[0].value=\'" + inpw + "\'")
+    driver.execute_script("document.getElementsByName('txt_passwd')[0].value=\'" + pw + "\'")
     # time.sleep(1)
 
     driver.find_element_by_xpath(
         '/html/body/form[1]/table/tbody/tr/td/table/tbody/tr[4]/td[1]/table/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/input').click()
     driver.implicitly_wait(3)
     driver.get('https://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do')
-
-
+    userinfo = User.objects.all()
+    if(userinfo.filter(name=id, password=pw)):
+        print('login check - already has data')
+    else:
+        userinfo = User(name=id, password=pw)
+        userinfo.save()
+    return 0
 def Login(request):
     # id=request.POST['id']
     # pw=request.POST['pw']
