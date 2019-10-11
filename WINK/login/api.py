@@ -35,11 +35,13 @@ def create(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         #return JsonResponse(request.data)
 
-@api_view(['GET'])
+@api_view(['POST'])
 @csrf_exempt
 @permission_classes((AllowAny,))
 def logincheck(request):
-    if request.method == 'GET':
+    print(request.data)
+
+    if request.method == 'POST':
         try:
             id=request.data.get('id')
             pw=request.data.get('pw')
@@ -64,6 +66,7 @@ def logincheck(request):
 
             return JsonResponse({'TOKEN' : token})
         except:
+            print("error")
             return JsonResponse({'LOGIN' : 'FAIL'})
 
 def save_session(request, id, pw, token):
