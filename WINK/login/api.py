@@ -63,13 +63,14 @@ def logincheck(request):
 
 
 
-
+            print (token)
             return JsonResponse({'TOKEN' : token})
         except:
             print("error")
             return JsonResponse({'LOGIN' : 'FAIL'})
 
 def save_session(request, id, pw, token):
+    print(id, pw)
     request.session[token]={'userinfo':[id, pw]}
     print('save session')
 
