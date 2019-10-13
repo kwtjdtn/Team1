@@ -7,7 +7,7 @@ urlpatterns = [
     path('', views.index),
     path('logincheck/',views.Login),
     path('afterlogin/',views.afterLogin),
-    path('api/',api.create),
+    path('api/createschedule',api.createschedule),
     path('api/logincheck/', api.logincheck),
     path('api/getuserinfo/', api.get_user_info),
 ]

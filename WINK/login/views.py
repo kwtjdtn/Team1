@@ -2,6 +2,8 @@ from bs4 import BeautifulSoup
 from django.contrib import messages
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from rest_framework import status
+from rest_framework.response import Response
 from selenium import webdriver
 
 
@@ -43,7 +45,7 @@ def logincheck(id, pw):
         userinfo = User(name=id, password=pw)
         userinfo.save()
     return 0
-def Login(request):
+def Login(id,pw):
     # id=request.POST['id']
     # pw=request.POST['pw']
     # userInfo = UserInfo.objects.all()
@@ -55,8 +57,8 @@ def Login(request):
     try:    #try login
         # driver.get('https://ktis.kookmin.ac.kr/')
         # driver.implicitly_wait(3)
-        id = request.POST['id']
-        pw = request.POST['pw']
+        id = id
+        pw = pw
         # driver.execute_script("document.getElementsByName('txt_user_id')[0].value=\'" + id + "\'")
         # # time.sleep(1)
         # driver.execute_script("document.getElementsByName('txt_passwd')[0].value=\'" + pw + "\'")
@@ -183,12 +185,12 @@ def Login(request):
 
 
 
-            return HttpResponseRedirect('/login/afterlogin/')
+            return Response(status=status.HTTP_200_OK)
         else:
-            return HttpResponseRedirect('/login/afterlogin/')
+            return Response(status=status.HTTP_200_OK)
     except:     #login fail
         #print('false')
-        return HttpResponseRedirect('/login/', messages.error(request, 'false'))
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 

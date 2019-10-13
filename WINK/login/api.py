@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from login import views
 from login.models import UserScheduleDB
 from login.serializers import UserScheduleSerializers
+from login.views import Login
 
 
 @api_view(['GET', 'POST'])
@@ -80,4 +81,25 @@ def get_user_info(request):
         data =request.headers.get('Authorization')
         data = data[7:]
         print(data)
+        # test=request.session.get(data, False)
+        # test=test['userinfo']
+        # print(test[0])
+        # print(test[1])
         return Response(request.session.get(data, False))
+
+@api_view(['GET'])
+def createschedule(request):
+    if request.method == 'GET':
+        data =request.headers.get('Authorization')
+        data = data[7:]
+        print(data)
+        try:
+            userinfo = request.session.get(data, False)
+            userinfo = userinfo['userinfo']
+
+            Login(userinfo[0],userinfo[1])
+            data = UserScheduleDB.objects.all()
+            serializer = UserScheduleSerializers(data.filter(student_code=userinfo[0]), many=True)
+            return Response(serializer.data,status=status.HTTP_200_OK)
+        except:
+            return Response(False,status=status.HTTP_400_BAD_REQUEST)
