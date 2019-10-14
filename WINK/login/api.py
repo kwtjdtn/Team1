@@ -100,6 +100,6 @@ def createschedule(request):
             Login(userinfo[0],userinfo[1])
             data = UserScheduleDB.objects.all()
             serializer = UserScheduleSerializers(data.filter(student_code=userinfo[0]), many=True)
-            return Response(serializer.data,status=status.HTTP_200_OK)
+            return JsonResponse({"data":serializer.data},status=status.HTTP_200_OK)
         except:
             return Response(False,status=status.HTTP_400_BAD_REQUEST)
