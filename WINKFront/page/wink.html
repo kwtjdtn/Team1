@@ -52,14 +52,13 @@
     // respJson contains your json
     // response is your html
   }
-})
+            })
         }
 
 
 /**/</script>
     <script>
         function myfunc(){
-<!--            var data = {id:"20153159",pw:"rhrnak2628!"};-->
             var input_id = document.getElementById("input-id").value;
             var input_pw = document.getElementById("input-pw").value;
             var data = {id: input_id, pw: input_pw};
@@ -71,8 +70,17 @@
                 dataType: 'json',
                 data: data,
                 async: false,
-                success: function(msg) {
-                    alert(JSON.stringify(msg));
+                error: function (error) {
+                    alert(error);
+                },
+                success: function (msg) {
+                    if (JSON.stringify(msg) == "{\"LOGIN\":\"FAIL\"}") {
+                        alert("로그인 실패");
+                    }
+                    else {
+                        alert(JSON.stringify(msg));
+                        location.href="wink_afterlogin.html";
+                    }                  
                 }
             });
 
@@ -136,7 +144,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="form-group col-sm-6 pull-right">
-                                                            <input type='submit' id='login2' class="btn btn-warning form-control" value='LOGIN' onClick="myfunc();" />
+                                                            <input type='button' id='login2' class="btn btn-warning form-control" value='LOGIN' onClick="myfunc();" />
                                                         </div>
                                                         <div class="form-group col-sm-6 pull-right">
                                                             <input type='button' id='singup' class="btn btn-primary form-control" value='Sing Up' onClick="location.href='wink_signup.html'" />
