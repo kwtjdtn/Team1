@@ -12,7 +12,7 @@ from userinfo.models import User
 
 
 def index(request):
-	print("zz")
+    print("zz")
     return render(request, 'login/wink.html')
 
 def afterLogin(request):
