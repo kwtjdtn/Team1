@@ -10,4 +10,5 @@ urlpatterns = [
     path('api/createschedule',api.createschedule),
     path('api/logincheck/', api.logincheck),
     path('api/getuserinfo/', api.get_user_info),
+    path('api/test/', api.test),
 ]
