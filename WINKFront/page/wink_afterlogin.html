@@ -31,6 +31,28 @@
             right: 0px;
         }
     </style>
+    <script type="text/javascript">
+        function timetable() {
+;            $.ajax({
+                url: 'http://localhost:8000/login/api/createschedule/',
+                type: 'GET',
+                contentType: 'application/x-www-form-urlencoded',
+                dataType: 'json',
+                beforeSend: function (head) {
+                    //head.setRequestHeader("Content-Type","session");
+                    head.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem("session"));
+                },
+                async: false,
+                error: function (error) {
+                    alert(error);
+                    location.href="wink_timetable.html"
+                },
+                success: function (timetalbe) {
+                    alert(JSON.stringify(timetable));
+                }
+            });
+        }
+/**/</script>
 </head>
 
 <body>
@@ -78,7 +100,7 @@
                                                     </div>
                                                     <div class="col-sm-6">
                                                         <div class="form-group">
-                                                            <input type="button" class="form-control big-btn btn-fill btn-warning" name='text' value="내 시간표 확인하기" onClick="location.href='wink_timetable.html'">
+                                                            <input type="button" class="form-control big-btn btn-fill btn-warning" name='text' value="내 시간표 확인하기" onClick="timetable();"/>
                                                         </div>
                                                         <div class="form-group">
                                                             <input type="button" class="form-control big-btn btn-fill btn-primary" name='text1' value='공강 시간표 찾기' onclick="location.href='#'" />
@@ -110,7 +132,6 @@
                                             <div class="tab-pane" id="Lotto">
                                                 <div class="row">
                                                     <h4 class="info-text">로또는 중독입니다.</h4>
-                                                    <a>${sessionScope.studentSub.studentName}</a>
                                                     <div class="col-sm-3">
                                                     </div>
                                                     <div class="col-sm-6">
