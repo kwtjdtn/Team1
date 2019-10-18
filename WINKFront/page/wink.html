@@ -44,7 +44,7 @@
             var data = {id: input_id, pw: input_pw};
 
             $.ajax({
-                url: 'http://localhost:8000/login/api/logincheck/',
+                url: 'http://localhost:8000/login/api/login/',
                 type: 'POST',
                 contentType: 'application/x-www-form-urlencoded',
                 dataType: 'json',
@@ -54,10 +54,12 @@
                     alert(error);
                 },
                 success: function (msg) {
-                    if (JSON.stringify(msg) == "{\"LOGIN\":\"FAIL\"}") {
+                    alert(msg)
+                    if (JSON.stringify(msg) == "{\"login\":\"fail\"}") {
                         alert("로그인 실패");
                     }
                     else {
+                        alert(msg)
                         var parsedData = msg;
                         var TOKEN = parsedData['TOKEN'];
                         var jsTOKEN = JSON.stringify(TOKEN);
