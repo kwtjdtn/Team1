@@ -26,7 +26,7 @@ SECRET_KEY = '2$!h2kf66k+f61-#r(ts_v_0ex(h#7+1e@afhxl^ee1#sw@tt2'
 DEBUG = True
 ############DEBUG = True
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = [*]
 #################ALLOWED_HOSTS = []
 
 # Application definition
