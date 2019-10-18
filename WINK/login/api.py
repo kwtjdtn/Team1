@@ -12,7 +12,7 @@ from login import views
 from login.models import UserScheduleDB
 from login.serializers import UserScheduleSerializers
 from login.views import Login
-
+import requests
 
 @api_view(['GET', 'POST'])
 def test(request):
@@ -98,3 +98,26 @@ def createschedule(request):
             return JsonResponse({"data":serializer.data},status=status.HTTP_200_OK)
         except:
             return Response(False,status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def ktislogin(request):
+    if request.method == 'POST':
+        try:
+            session = requests.Session()
+            with requests.Session() as s:
+                id = request.data.get('txt_user_id')
+                pw = request.data.get('txt_passwd')
+                URL = 'https://ktis.kookmin.ac.kr/kmu/com.Login.do?'
+                data = {'txt_user_id':id, 'txt_passwd':pw}
+                response = s.get(URL,data = data)
+                print(response.headers)
+                #print(response.headers)
+                URL2 = 'https://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do'
+                custom_headers = {'Set-Cookie':response.headers['Set-Cookie']}
+                response2 = s.post(URL2,custom_headers)
+                print(response2.text[1])
+                if(response2.text[1]!='H'):
+                    return JsonResponse({"login":"fail"},status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"login":"success"},status=status.HTTP_200_OK)
+        except:
+            return JsonResponse({"login":"fail"},status=status.HTTP_400_BAD_REQUEST)

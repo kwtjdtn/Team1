@@ -1,11 +1,8 @@
 from bs4 import BeautifulSoup
-from django.contrib import messages
-from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.response import Response
 from selenium import webdriver
-
 
 # Create your tests here.
 from userinfo.models import User
@@ -21,24 +18,24 @@ def afterLogin(request):
 #######chrome option
 from login.models import UserScheduleDB
 
-path = 'C:/chromedriver.exe'  # ex. C:/downloads/chromedriver.exe
-options = webdriver.ChromeOptions()
-options.add_argument('headless')
-driver = webdriver.Chrome(path, chrome_options=options)
-###############chrome option end
+# path = 'C:/chromedriver.exe'  # ex. C:/downloads/chromedriver.exe
+# options = webdriver.ChromeOptions()
+# options.add_argument('headless')
+# driver = webdriver.Chrome(path, chrome_options=options)
+# ###############chrome option end
 
 def logincheck(id, pw):
-    driver.get('https://ktis.kookmin.ac.kr/')
-    driver.implicitly_wait(3)
-    driver.execute_script("document.getElementsByName('txt_user_id')[0].value=\'" + id + "\'")
-    # time.sleep(1)
-    driver.execute_script("document.getElementsByName('txt_passwd')[0].value=\'" + pw + "\'")
-    # time.sleep(1)
-
-    driver.find_element_by_xpath(
-        '/html/body/form[1]/table/tbody/tr/td/table/tbody/tr[4]/td[1]/table/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/input').click()
-    driver.implicitly_wait(3)
-    driver.get('https://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do')
+    # driver.get('https://ktis.kookmin.ac.kr/')
+    # driver.implicitly_wait(3)
+    # driver.execute_script("document.getElementsByName('txt_user_id')[0].value=\'" + id + "\'")
+    # # time.sleep(1)
+    # driver.execute_script("document.getElementsByName('txt_passwd')[0].value=\'" + pw + "\'")
+    # # time.sleep(1)
+    #
+    # driver.find_element_by_xpath(
+    #     '/html/body/form[1]/table/tbody/tr/td/table/tbody/tr[4]/td[1]/table/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/input').click()
+    # driver.implicitly_wait(3)
+    # driver.get('https://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do')
     userinfo = User.objects.all()
     if(userinfo.filter(name=id, password=pw)):
         print('login check - already has data')
@@ -76,7 +73,7 @@ def Login(id,pw):
         #print(userSchdule)
         if str(userSchdule)=='<QuerySet []>':
 
-            html = driver.page_source
+            html = 'driver.page_source'
             soup = BeautifulSoup(html, 'html.parser')
             soup.prettify(formatter=lambda s: s.replace('&nbsp', ''))
             notices = soup.findAll('td', attrs={'rowspan': '2'})
