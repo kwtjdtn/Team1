@@ -103,6 +103,7 @@ def createschedule(request):
 def ktislogin(request):
     if request.method == 'POST':
         try:
+            print(request.headers)
             session = requests.Session()
             with requests.Session() as s:
                 id = request.data.get('id')
@@ -127,8 +128,10 @@ def ktislogin(request):
                 token = ""
                 for i in range(_LENGTH):
                     token += random.choice(string_pool)  # 랜덤한 문자열 하나 선택
-                print(token)
+
                 save_session(request, id, pw, token)
+                print(request.session.get(token,False))
+                print(token)
                 if(response2.text[1]!='H'):
                     return JsonResponse({"login":"fail"},status=status.HTTP_400_BAD_REQUEST)
             return JsonResponse({"TOKEN":token},status=status.HTTP_200_OK)
