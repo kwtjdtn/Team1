@@ -105,19 +105,32 @@ def ktislogin(request):
         try:
             session = requests.Session()
             with requests.Session() as s:
-                id = request.data.get('txt_user_id')
-                pw = request.data.get('txt_passwd')
+                id = request.data.get('id')
+                pw = request.data.get('pw')
                 URL = 'https://ktis.kookmin.ac.kr/kmu/com.Login.do?'
                 data = {'txt_user_id':id, 'txt_passwd':pw}
                 response = s.get(URL,data = data)
-                print(response.headers)
+                #print(response.headers)
+
                 #print(response.headers)
                 URL2 = 'https://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do'
                 custom_headers = {'Set-Cookie':response.headers['Set-Cookie']}
                 response2 = s.post(URL2,custom_headers)
-                print(response2.text[1])
+                #print(response2.text)
+
+                _LENGTH = 500  # N자리
+
+                # 숫자 + 대소문자
+                string_pool = string.ascii_letters + string.digits
+
+                # 랜덤한 문자열 생성
+                token = ""
+                for i in range(_LENGTH):
+                    token += random.choice(string_pool)  # 랜덤한 문자열 하나 선택
+                print(token)
+                save_session(request, id, pw, token)
                 if(response2.text[1]!='H'):
                     return JsonResponse({"login":"fail"},status=status.HTTP_400_BAD_REQUEST)
-            return JsonResponse({"login":"success"},status=status.HTTP_200_OK)
+            return JsonResponse({"TOKEN":token},status=status.HTTP_200_OK)
         except:
             return JsonResponse({"login":"fail"},status=status.HTTP_400_BAD_REQUEST)
