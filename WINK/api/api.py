@@ -85,6 +85,7 @@ def ktislogin(request):
                 string_pool = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
                 # 랜덤한 문자열 생성
                 token = str(time.time())
+                token = token[11:]
                 for i in range(_LENGTH):
                     token += random.choice(string_pool)  # 랜덤한 문자열 하나 선택
 
