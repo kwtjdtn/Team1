@@ -72,20 +72,20 @@
                     alert(error);
                 },
                 success: function (msg, state, xhr) {
-                    alert(document.cookie);
                     if (JSON.stringify(msg) == "{\"login\":\"fail\"}") {
                         alert("로그인 실패");
                     }
                     else {
+                        alert(xhr.getAllResponseHeaders());
                         var parsedData = msg;
                         var TOKEN = parsedData['TOKEN'];
                         var jsTOKEN = JSON.stringify(TOKEN);
                         var completeTOKEN = jsTOKEN.replace(/\"/gi, "");
-                        sessionStorage.setItem("session", completeTOKEN);
+                        sessionStorage.setItem("session", completeTOKEN);                        
                         location.href = "wink_afterlogin.html";
                         var getck;
-                        setcookie("sessionid", getck, 365);                       
-                    }
+                        setcookie("sessionid", value, 365);
+                        }
                 }
             });            
         }
