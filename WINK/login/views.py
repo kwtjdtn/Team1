@@ -2,7 +2,6 @@ from bs4 import BeautifulSoup
 from django.shortcuts import render
 from rest_framework import status
 from rest_framework.response import Response
-from selenium import webdriver
 
 # Create your tests here.
 from userinfo.models import User
