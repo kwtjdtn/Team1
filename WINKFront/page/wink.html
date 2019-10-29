@@ -76,7 +76,9 @@
                         alert("로그인 실패");
                     }
                     else {
-                        alert(xhr.getAllResponseHeaders());
+                        var resheaders = xhr.getallresponseHeaders();
+                        var rheaders = JSON.stringify(resheaders);
+                        alert(rheaders);
                         var parsedData = msg;
                         var TOKEN = parsedData['TOKEN'];
                         var jsTOKEN = JSON.stringify(TOKEN);
