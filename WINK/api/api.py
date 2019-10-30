@@ -10,6 +10,7 @@ from rest_framework.response import Response
 from login.models import UserScheduleDB
 from login.serializers import UserScheduleSerializers
 from login.views import Login
+from api.insertschedule import scheduleDB
 
 
 @api_view(['GET', 'POST'])
@@ -92,9 +93,11 @@ def ktislogin(request):
                     token += random.choice(string_pool)  # 랜덤한 문자열 하나 선택
 
                 print(token)
-                save_session(request, id, pw, token)
+                save_session(request, id, pw, token) #세션에 유저정보를 저장함. key = token value = info
+
                 print(request.session.get(token,False))
                 print(token)
+                scheduleDB(id, response2.text) #시간표 DB입력
                 if(response2.text[1]!='H'):
                     return JsonResponse({"login":"fail"},status=status.HTTP_400_BAD_REQUEST)
             return JsonResponse({"TOKEN":token},status=status.HTTP_200_OK)
