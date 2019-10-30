@@ -50,7 +50,7 @@ def get_user_info(request):
 @api_view(['GET'])
 def createschedule(request):
     if request.method == 'GET':
-        data =request.headers.get('Token')
+        data = request.META.get('HTTP_TOKEN')
 
         print(data)
         try:
@@ -72,7 +72,9 @@ def ktislogin(request):
                 id = request.data.get('id')
                 pw = request.data.get('pw')
                 URL = 'https://ktis.kookmin.ac.kr/kmu/com.Login.do?'
+
                 data = {'txt_user_id':id, 'txt_passwd':pw}
+
                 response = s.get(URL,data = data)
 
                 URL2 = 'https://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do'

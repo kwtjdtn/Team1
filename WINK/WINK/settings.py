@@ -49,7 +49,6 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    #django-cors-headers
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -60,18 +59,19 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = (
-
-    'https://localhost:8000',
-    'https://domain_infomation',
-    'https://ip_address',
-
-)
 
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_CREDENTIALS = True
 
+CORS_ORIGIN_WHITELIST = (
+
+    'https://localhost:3000',
+    'https://127.0.0.1:3000',
+    'https://localhost:8000',
+    'https://127.0.0.1:8000',
+
+)
 
 ROOT_URLCONF = 'WINK.urls'
 
