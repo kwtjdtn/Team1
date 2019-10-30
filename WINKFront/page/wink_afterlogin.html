@@ -32,24 +32,29 @@
         }
     </style>
     <script type="text/javascript">
-        function timetable() {
-;            $.ajax({
-                url: 'http://localhost:8000/login/api/createschedule/',
+        function timetable() {            
+            $.ajax({
+                url: 'http://localhost:8000/login/api/createschedule',
                 type: 'GET',
-                contentType: 'application/x-www-form-urlencoded',
-                dataType: 'json',
-                beforeSend: function (head) {
-                    //head.setRequestHeader("Content-Type","session");
-                    head.setRequestHeader("Authorization", "Bearer " + sessionStorage.getItem("session"));
+                dataType: "json",
+                //headers: {
+                //    "Token": sessionStorage.getItem("session"),
+                //    'Accept': 'application/json;charset=UTF-8',
+                //    'Content-Type': 'application/json; charset=UTF-8'
+                //},
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("Token", sessionStorage.getItem("session"));
                 },
-                async: false,
-                error: function (error) {
-                    alert(error);
-                    location.href="wink_timetable.html"
+                error: function (xhr, status, error) {
+                    alert(document.cookie);
                 },
-                success: function (timetalbe) {
-                    alert(JSON.stringify(timetable));
-                }
+                success: function (msg1) {
+                    var parsedData = msg1;
+                    var tokhead = parsedData['data'];
+                    var sttoken = JSON.stringify(tokhead);
+                    alert(tokhead);
+                    location.href = "wink_timetalble.html";
+                },
             });
         }
 /**/</script>

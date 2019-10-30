@@ -6,7 +6,7 @@
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>WINK TimeTable</title>
-    
+
 
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
@@ -34,14 +34,32 @@
             right: 0px;
         }
     </style>
+    <script src="assets/js/jquery-2.2.4.min.js" type="text/javascript">
+        var name = "sessionid";
+        function setcookie(name, value, expireDate) {
+            var cookieStr = name + "=" + escape(value) + ((expireDate == null) ? "" : ("; expires=" +
+                expireDate.toGMTString()));
+            document.cookie = cookieStr;
+        }
+        function getcookie(name) {
+            var pairs = document.cookie.split(";");
+            for (var i = 0; i < pairs.length; i++) {
+                var pair = pairs[i].trim();
+                var unit = pair.split("=");
+                if (unit[0] == name)
+                    return unescape(unit[1]);
+            }
+            return null;
+        }
+    </script>
 </head>
 
 <body>
     <script>
-        function myfunc(){
+        function myfunc() {
             var input_id = document.getElementById("input-id").value;
             var input_pw = document.getElementById("input-pw").value;
-            var data = {id: input_id, pw: input_pw};
+            var data = { id: input_id, pw: input_pw };
 
             $.ajax({
                 url: 'http://localhost:8000/login/api/login/',
@@ -53,26 +71,24 @@
                 error: function (error) {
                     alert(error);
                 },
-                success: function (msg) {
-                    alert(msg)
+                success: function (msg, state, xhr) {
                     if (JSON.stringify(msg) == "{\"login\":\"fail\"}") {
                         alert("로그인 실패");
                     }
                     else {
-                        alert(msg)
                         var parsedData = msg;
                         var TOKEN = parsedData['TOKEN'];
                         var jsTOKEN = JSON.stringify(TOKEN);
                         var completeTOKEN = jsTOKEN.replace(/\"/gi, "");
-                        sessionStorage.setItem("session", completeTOKEN);
-                        location.href="wink_afterlogin.html";
-                    }                  
+                        sessionStorage.setItem("session", completeTOKEN);                        
+                        location.href = "wink_afterlogin.html";
+                        var getck;
+                        setcookie("sessionid", value, 365);
+                        }
                 }
-            });
-
+            });            
         }
-
-    </script>
+    </script>    
     <div class="image-container set-full-height">
         <!--   Creative Tim Branding   -->
         <div class="logo-container">
@@ -80,7 +96,7 @@
                 <span class="logo-contatiner" style='display:table; margin-left:auto; margin-right:auto;'>
                     <div class="logo">
                         <a href="wink_main.html">
-                            <img src="assets/img/wink.png" />
+                            <img src="assets/img/wink1.png" />
                         </a>
                     </div>
                 </span>
@@ -93,7 +109,7 @@
                         <div class="wizard-container">
 
                             <div class="card wizard-card" data-color="orange" id="wizardProfile">
-                                <form >
+                                <form>
                                     <!--        You can switch ' data-color="orange" '  with one of the next bright colors: "blue", "green", "orange", "red"          -->
 
                                     <div class="wizard-header">
