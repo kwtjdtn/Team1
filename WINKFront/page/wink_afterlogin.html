@@ -46,13 +46,13 @@
                     xhr.setRequestHeader("Token", sessionStorage.getItem("session"));
                 },
                 error: function (xhr, status, error) {
-                    alert(document.cookie);
+                    alert(xhr,status,error);
                 },
                 success: function (msg1) {
                     var parsedData = msg1;
-                    var tokhead = parsedData['data'];
-                    var sttoken = JSON.stringify(tokhead);
-                    alert(tokhead);
+                    //var tokhead = parsedData['data'];
+                    //var sttoken = JSON.stringify(tokhead);
+                    //alert(tokhead);
                     location.href = "wink_timetalble.html";
                 },
             });

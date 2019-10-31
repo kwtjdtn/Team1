@@ -35,6 +35,7 @@
         }
     </style>
     <script src="assets/js/jquery-2.2.4.min.js" type="text/javascript">
+        xhrFields: { withCredentials: true }
         var name = "sessionid";
         function setcookie(name, value, expireDate) {
             var cookieStr = name + "=" + escape(value) + ((expireDate == null) ? "" : ("; expires=" +
@@ -72,6 +73,7 @@
                     alert(error);
                 },
                 success: function (msg, state, xhr) {
+                    alert(xhr.getAllResponseHeaders());
                     if (JSON.stringify(msg) == "{\"login\":\"fail\"}") {
                         alert("로그인 실패");
                     }
@@ -80,11 +82,11 @@
                         var TOKEN = parsedData['TOKEN'];
                         var jsTOKEN = JSON.stringify(TOKEN);
                         var completeTOKEN = jsTOKEN.replace(/\"/gi, "");
-                        sessionStorage.setItem("session", completeTOKEN);                        
+                        sessionStorage.setItem("session", completeTOKEN);
                         location.href = "wink_afterlogin.html";
                         var getck;
-                        setcookie("sessionid", value, 365);
-                        }
+                        setcookie("sessionid", getck, 365);                       
+                    }
                 }
             });            
         }
@@ -98,7 +100,7 @@
                         <a href="wink_main.html">
                             <img src="assets/img/wink1.png" />
                         </a>
-                    </div>
+                    </div> 
                 </span>
             </div>
             <!--   Big container   -->
