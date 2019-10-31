@@ -76,7 +76,7 @@ def ktislogin(request):
 
                 data = {'txt_user_id':id, 'txt_passwd':pw}
 
-                response = s.get(URL,data = data)
+                response = s.post(URL,data)
 
                 URL2 = 'https://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do'
                 custom_headers = {'Set-Cookie':response.headers['Set-Cookie']}
