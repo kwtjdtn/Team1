@@ -12,4 +12,5 @@ urlpatterns = [
     path('api/getuserinfo/', api.get_user_info),
     path('api/test/', api.test),
     path('api/login/', api.ktislogin),
+    path('api/multiply/', api.multiply),
 ]
