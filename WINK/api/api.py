@@ -1,4 +1,6 @@
+import copy
 import time
+import json
 
 import requests
 from django.http import JsonResponse
@@ -103,3 +105,58 @@ def ktislogin(request):
             return JsonResponse({"TOKEN":token},status=status.HTTP_200_OK)
         except:
             return JsonResponse({"login":"fail"},status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+def multiply(request):
+    try:
+        # print(request.data.get('student_code'))
+        arr = request.data.get('student_code')
+        arr = arr.split(',')
+        # print(arr[0], arr[1])
+        # arr = [20153159, 20175165]
+        scheduleArr = [] #데이터 담아둘 공간
+        data = UserScheduleDB.objects.all()
+
+        # temp = temp[0]
+        dummy = {'student_code': 'blank',
+                 'time': 'blank',
+                 'A': 'blank',
+                 'B': 'blank',
+                 'C': 'blank',
+                 'D': 'blank',
+                 'E': 'blank',
+                 'F': 'blank'}
+        for i in range(8):
+            scheduleArr.append(dummy)  # 미리 balnk로 채워두고 쓸꺼임.
+
+        for k in arr:
+            serializer = UserScheduleSerializers(data.filter(student_code=k), many=True)
+            temp = json.dumps(serializer.data, ensure_ascii=False)  # 한글깨짐방지
+            temp = json.loads(temp)
+
+            count = -1
+            for i in temp:
+                count += 1
+                dummy = copy.deepcopy(scheduleArr[count])
+                for key, value in i.items():
+                    if value != 'blank':
+                        if key != 'time':
+                            dummy[key] = 'dummy'
+                        else:
+                            dummy[key] = value
+                        # print(key,value)
+
+                scheduleArr[count] = dummy
+        for i in scheduleArr:
+            for key, value in i.items():
+                if value == 'dummy':
+                    i[key] = 'blank'
+                elif value == 'blank':
+                    i[key] = '공강'
+
+        # print(scheduleArr)
+        # for i in scheduleArr:  # 출력확인용
+        #     print(i)
+        return JsonResponse({'data': scheduleArr}, status=status.HTTP_200_OK)
+    except:
+        return Response("fail", status=status.HTTP_400_BAD_REQUEST)
