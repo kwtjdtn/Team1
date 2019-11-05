@@ -25,7 +25,6 @@ SECRET_KEY = '2$!h2kf66k+f61-#r(ts_v_0ex(h#7+1e@afhxl^ee1#sw@tt2'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 ############DEBUG = True
-
 ALLOWED_HOSTS = ["*"]
 #################ALLOWED_HOSTS = []
 
@@ -63,6 +62,8 @@ MIDDLEWARE = [
 CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_CREDENTIALS = True
+
+SESSION_COOKIE_HTTPONLY = False
 
 CORS_ORIGIN_WHITELIST = (
 
@@ -148,4 +149,4 @@ ACCOUNT_AUTHENTICATION_METHOD = 'name'
 ACCOUNT_USER_MODEL_USERNAME_FIELD = 'name'
 ACCOUNT_USERNAME_REQUIRED = False
 
-SESSION_COOKIE_AGE = 3600 #세션 유지 시간(초단위)
+SESSION_COOKIE_AGE = 3600 #?�션 ?��? ?�간(초단??
