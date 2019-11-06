@@ -68,17 +68,16 @@ def createschedule(request):
     if request.method == 'GET':
         data = request.META.get('HTTP_TOKEN')
 
-        print(data)
+        # print(data)
         try:
-            userinfo = request.session.get(data, False)
-            userinfo = userinfo['userinfo']
+            userinfo = NormalUser.objects.filter(token=data)
+            print(userinfo[0])
 
-            Login(userinfo[0],userinfo[1])
             data = UserScheduleDB.objects.all()
             serializer = UserScheduleSerializers(data.filter(student_code=userinfo[0]), many=True)
-            return JsonResponse({"data":serializer.data},status=status.HTTP_200_OK)
+            return JsonResponse({"data": serializer.data}, status=status.HTTP_200_OK)
         except:
-            return Response('Fail',status=status.HTTP_400_BAD_REQUEST)
+            return Response('Fail', status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 def ktislogin(request):
