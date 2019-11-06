@@ -47,32 +47,22 @@
     <script type="text/javascript">
         function timetable() {
             $.ajax({
-                url: 'http://localhost:8000/login/api/multiply/',
-                type: 'POST',
-                dataType: "json",
-                contentType: 'application/x-www-form-urlencoded',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                mode: 'no-cors',
-                xhrFields: { witheCredentials: true},
-                crossDomain: true,
-                //headers: {
-                //    "Token": sessionStorage.getItem("session"),
-                //    'Accept': 'application/json;charset=UTF-8',
-                //    'Content-Type': 'application/json; charset=UTF-8'
-                //},
-                beforeSend: function (xhr) {
-                },
-                error: function (error) {
-                    alert("error");
-                },
-                success: function (msg1) {
-                    var parsedData = msg1;
-                    //var tokhead = parsedData['data'];
-                    //var sttoken = JSON.stringify(tokhead);
-                    //alert(tokhead);
-                    location.href = "/timetalble";
-                },
+                url: "http://localhost:8000/login/api/multiply/", // 클라이언트가 HTTP 요청을 보낼 서버의 URL 주소
+                data:  {"student_code":"20153159, 20175165"} , // HTTP 요청과 함께 서버로 보낼 데이터
+                method: "POST", // HTTP 요청 메소드(GET, POST 등)
+                dataType: "json" // 서버에서 보내줄 데이터의 타입
+                 }) // HTTP 요청이 성공하면 요청한 데이터가 done() 메소드로 전달됨.
+            .done(function(json) {
+                alert('success');
+            })
+            .fail(function(xhr, status, errorThrown) {
+                alert('fail')})
+            .always(function(xhr, status) {
+                $("#text").html("요청이 완료되었습니다!");
             });
+
+
+            };
             //fetch('/createschedule', {
             //    method: 'POST',
             //    headers: {
@@ -82,7 +72,7 @@
             //    console.log(response);
             //    window.location.href = "/timetable";
             //})
-        }
+
     </script>
     <div class="image-container set-full-height">
         <!--   Creative Tim Branding   -->
