@@ -77,7 +77,7 @@ app.post('/login', function (req, res) {
             })
         })
 })
-app.get('/afterlogin', function (req, res) { 
+app.get('/afterlogin', function (req, res) {
     fs.readFile('wink_afterlogin.html', function (error, data) {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(data);
@@ -99,7 +99,7 @@ app.get('/main', function (req, res) {
         res.writeHead(200, { 'Content-Type': 'text/html' });
         res.end(data);
     });
-}); 
+});
 
 app.get('/timetable', function (req, res) {
     fs.readFile('wink_timetable.html', function (error, data) {

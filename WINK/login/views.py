@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 # Create your tests here.
-from userinfo.models import User
+from userinfo.models import User, NormalUser
 
 
 def index(request):
@@ -35,12 +35,13 @@ def logincheck(id, pw):
     #     '/html/body/form[1]/table/tbody/tr/td/table/tbody/tr[4]/td[1]/table/tbody/tr[2]/td/table/tbody/tr[4]/td[2]/input').click()
     # driver.implicitly_wait(3)
     # driver.get('https://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do')
-    userinfo = User.objects.all()
-    if(userinfo.filter(name=id, password=pw)):
+    userinfo = NormalUser.objects.all()
+    if(userinfo.filter(id=id, pw=pw)):
         print('login check - already has data')
     else:
-        userinfo = User(name=id, password=pw)
+        userinfo = NormalUser(id=id, pw=pw)
         userinfo.save()
+        print(111111111)
     return 0
 def Login(id,pw):
     # id=request.POST['id']
