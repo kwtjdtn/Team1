@@ -13,6 +13,9 @@ from login.models import UserScheduleDB
 from login.serializers import UserScheduleSerializers
 from login.views import Login
 from api.insertschedule import scheduleDB
+from userinfo.models import NormalUser
+
+from datetime import datetime, timedelta
 
 
 @api_view(['GET', 'POST'])
@@ -33,9 +36,19 @@ def test(request):
         return Response(status=status.HTTP_200_OK)
 
 
-def save_session(request, id, pw, token):
-    print(id, pw)
-    request.session[token]={'userinfo':[id, pw]}
+def save_session(id, pw, token, expire=None):
+    # print(id, pw)
+    # request.session[token]={'userinfo':[id, pw]}
+    userinfo = NormalUser.objects.all()
+    if (userinfo.filter(id=id, pw=pw)):
+        print(expire)
+        userinfo.filter(id=id, pw=pw).update(token=token, expire=expire)
+        # userinfo.token = token
+        # userinfo.expire = expire
+        print('login check - already has data')
+    else:
+        userinfo = NormalUser(id=id, pw=pw, token=token, expire=expire)
+        userinfo.save()
     print('save session')
 
 @api_view(['GET'])
@@ -82,8 +95,10 @@ def ktislogin(request):
 
                 URL2 = 'https://ktis.kookmin.ac.kr/kmu/ucb.Ucb0164rAGet01.do'
                 custom_headers = {'Set-Cookie':response.headers['Set-Cookie']}
-                response2 = s.post(URL2,custom_headers)
+                response2 = s.post(URL2, custom_headers)
                 #print(response2.text) #시간표 긁어온거
+                if (response2.text[1] != 'H'):
+                    return JsonResponse({"login": "fail"}, status=status.HTTP_400_BAD_REQUEST)
 
                 _LENGTH = 500  # N자리
                 # 숫자 + 대소문자
@@ -93,18 +108,18 @@ def ktislogin(request):
                 token = token[11:]
                 for i in range(_LENGTH):
                     token += random.choice(string_pool)  # 랜덤한 문자열 하나 선택
-
+                expire = datetime.now()
                 print(token)
-                save_session(request, id, pw, token) #세션에 유저정보를 저장함. key = token value = info
+                save_session(id, pw, token, expire) #세션에 유저정보를 저장함. key = token value = info
 
-                print(request.session.get(token,False))
+
                 print(token)
                 scheduleDB(id, response2.text) #시간표 DB입력
-                if(response2.text[1]!='H'):
-                    return JsonResponse({"login":"fail"},status=status.HTTP_400_BAD_REQUEST)
-            return JsonResponse({"TOKEN":token},status=status.HTTP_200_OK)
+                res = JsonResponse({"TOKEN": token}, status=status.HTTP_200_OK)
+                res.set_cookie('exp', expire)
+            return res
         except:
-            return JsonResponse({"login":"fail"},status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({"login": "fail"}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 def multiply(request):
