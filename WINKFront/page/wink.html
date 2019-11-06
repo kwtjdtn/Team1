@@ -42,13 +42,17 @@
         }
     </style>
     <script>
-        xhrFields: { withCredentials: true }
+        function onSunccess(response) {
+            let cookieHeader = response.headers.get('Set-Cookie');
+            document.cookie = cookieHeader;
+        }
         function setcookie(name, value, expireDate) {
             var cookieStr = name + "=" + escape(value) + ((expireDate == null) ? "" : ("; expires=" +
                 expireDate.toGMTString()));
             document.cookie = cookieStr;
         }
-        function getcookie(name) {
+        function getcookie(cname) {
+            var name = cname + "=";
             var pairs = document.cookie.split(";");
             for (var i = 0; i < pairs.length; i++) {
                 var pair = pairs[i].trim();
@@ -67,36 +71,59 @@
             var input_id = document.getElementById("input-id").value;
             var input_pw = document.getElementById("input-pw").value;
             var data = { id: input_id, pw: input_pw };
-            $.ajax({
-                url: 'http://localhost:8000/login/api/login/',
-                type: 'POST',
-                contentType: 'application/x-www-form-urlencoded',
-                withCredentials: true,
-                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                xhrFields: { witheCredentials: true},
-                mode: 'no-cors',
-                crossDomain: true,
-                dataType: 'json',
-                data: data,
-                async: false,
-                error: function (error) {
-                    alert(error);
+            var id = input_id;
+            var pw = input_pw;
+
+            fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
                 },
-                success: function (msg) {
-                    if (JSON.stringify(msg) == "{\"login\":\"fail\"}") {
-                        alert("로그인 실패");
-                    }
-                    else {
-                        //setcookie("session_id", )
-                        var parsedData = msg;
-                        var TOKEN = parsedData['TOKEN'];
-                        var jsTOKEN = JSON.stringify(TOKEN);
-                        var completeTOKEN = jsTOKEN.replace(/\"/gi, "");
-                        sessionStorage.setItem("session", completeTOKEN);
-                        location.href = '/afterlogin';
-                    }
-                }
-            });
+                body: JSON.stringify({
+                    id,
+                    pw
+                })
+
+            }).then(response => {
+                console.log(response);
+                //var date = new Date();
+                //date.setDate(date.getDate() + 7);
+                //var willCookie = "";
+                //willCookie += "TOKEN=" + response + ";"
+                //willCookie += "expires=" + date.toUTCString();
+
+                //document.cookie = willCookie;
+                window.location.href = "/afterlogin";
+            })
+            //$.ajax({
+            //    url: 'http://localhost:8000/login/api/login/',
+            //    type: 'POST',
+            //    contentType: 'application/x-www-form-urlencoded',
+            //    withCredentials: true,
+            //    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            //    xhrFields: { witheCredentials: true},
+            //    mode: 'no-cors',
+            //    crossDomain: true,
+            //    dataType: 'json',
+            //    data: data,
+            //    async: false,
+            //    error: function (error) {
+            //        alert(error);
+            //    },
+            //    success: function (msg) {
+            //        if (JSON.stringify(msg) == "{\"login\":\"fail\"}") {
+            //            alert("로그인 실패");
+            //        }
+            //        else {
+            //            var parsedData = msg;
+            //            var TOKEN = parsedData['TOKEN'];
+            //            var jsTOKEN = JSON.stringify(TOKEN);
+            //            var completeTOKEN = jsTOKEN.replace(/\"/gi, "");
+            //            sessionStorage.setItem("session", completeTOKEN);
+            //            location.href = '/afterlogin';
+            //        }
+            //    }
+            //});
         }
     </script>
     <div class="image-container set-full-height">
