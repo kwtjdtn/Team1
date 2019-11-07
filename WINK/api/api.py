@@ -76,7 +76,7 @@ def createschedule(request):
 
             data = UserScheduleDB.objects.all()
             serializer = UserScheduleSerializers(data.filter(student_code=userinfo[0]), many=True)
-            return Response(serializer.data, status=status.HTTP_200_OK)
+            return JsonResponse({"data": serializer.data}, status=status.HTTP_200_OK)
         except:
             return Response('Fail', status=status.HTTP_400_BAD_REQUEST)
 
@@ -159,12 +159,12 @@ def multiply(request):
                         # print(key,value)
 
                 scheduleArr[count] = dummy
-        for i in scheduleArr:
-            for key, value in i.items():
-                if value == 'dummy':
-                    i[key] = 'blank'
-                elif value == 'blank':
-                    i[key] = '공강'
+        # for i in scheduleArr:
+        #     for key, value in i.items():
+        #         if value == 'dummy':
+        #             i[key] = 'blank'
+        #         elif value == 'blank':
+        #             i[key] = '공강'
 
         # print(scheduleArr)
         # for i in scheduleArr:  # 출력확인용
