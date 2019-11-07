@@ -76,7 +76,7 @@ def createschedule(request):
 
             data = UserScheduleDB.objects.all()
             serializer = UserScheduleSerializers(data.filter(student_code=userinfo[0]), many=True)
-            return JsonResponse({"data": serializer.data}, status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         except:
             return Response('Fail', status=status.HTTP_400_BAD_REQUEST)
 
@@ -89,7 +89,7 @@ def ktislogin(request):
                 pw = request.data.get('pw')
                 URL = 'https://ktis.kookmin.ac.kr/kmu/com.Login.do?'
 
-                data = {'txt_user_id':id, 'txt_passwd':pw}
+                data = {'txt_user_id': id, 'txt_passwd': pw}
 
                 response = s.post(URL,data)
 
