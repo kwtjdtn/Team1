@@ -72,6 +72,11 @@
                 }
             }).then(response => {
                 console.log(response);
+                var timeData = response;
+                //var timedb = parsedData['TOKEN'];
+                var timedb = JSON.stringify(timeData);
+                //var completeTOKEN = jsTOKEN.replace(/\"/gi, "");
+                sessionStorage.setItem("session", timedb);
                 window.location.href = "/timetable";
             })
 		};
