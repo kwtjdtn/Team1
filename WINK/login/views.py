@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 # Create your tests here.
-from userinfo.models import User, NormalUser
+from userinfo.models import NormalUser
 
 
 def index(request):

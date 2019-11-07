@@ -36,9 +36,10 @@ def test(request):
         return Response(status=status.HTTP_200_OK)
 
 
-def save_session(id, pw, token, expire=None):
+def save_session(request, id, pw, token, expire=None):
     # print(id, pw)
-    # request.session[token]={'userinfo':[id, pw]}
+    request.session[token]={'userinfo':[id, pw]}
+    request.session.save()
     userinfo = NormalUser.objects.all()
     if (userinfo.filter(id=id, pw=pw)):
         print(expire)
@@ -67,8 +68,8 @@ def get_user_info(request):
 def createschedule(request):
     if request.method == 'GET':
         data = request.META.get('HTTP_TOKEN')
-
-        # print(data)
+	
+        print(data)
         try:
             userinfo = NormalUser.objects.filter(token=data)
             print(userinfo[0])
@@ -108,11 +109,8 @@ def ktislogin(request):
                 for i in range(_LENGTH):
                     token += random.choice(string_pool)  # 랜덤한 문자열 하나 선택
                 expire = datetime.now()
-                print(token)
-                save_session(id, pw, token, expire) #세션에 유저정보를 저장함. key = token value = info
-
-
-                print(token)
+                save_session(request, id, pw, token, expire) #세션에 유저정보를 저장함. key = token value = info
+                #print(request.session.session_key)
                 scheduleDB(id, response2.text) #시간표 DB입력
                 res = JsonResponse({"TOKEN": token}, status=status.HTTP_200_OK)
                 res.set_cookie('exp', expire)

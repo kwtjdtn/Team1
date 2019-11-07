@@ -66,7 +66,7 @@ CORS_ALLOW_CREDENTIALS = True
 #SESSION_COOKIE_HTTPONLY = False
 
 SESSION_ENGINE = "django.contrib.sessions.backends.signed_cookies"
-
+#SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"
 CORS_ORIGIN_WHITELIST = (
 
     'https://localhost:3000',
@@ -146,9 +146,5 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_USER_MODEL = 'userinfo.User'
-ACCOUNT_AUTHENTICATION_METHOD = 'name'
-ACCOUNT_USER_MODEL_USERNAME_FIELD = 'name'
-ACCOUNT_USERNAME_REQUIRED = False
 
 SESSION_COOKIE_AGE = 3600 #?¸ì…˜ ? ì? ?œê°„(ì´ˆë‹¨??
