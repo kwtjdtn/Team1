@@ -83,9 +83,10 @@ app.get('/afterlogin', function (req, res) {
         res.end(data);
     });
 });
-app.post('/createschedule', function (req, res) {
-    console.log(req.session.auth, req.body);
-    axios.post(apiHost + 'login/api/multiply/',req.body)
+app.get('/createschedule', function (req, res) {
+    console.log(req.session.auth);
+   
+    axios.get(apiHost + 'login/api/createschedule/', { headers: { Token: req.session.auth } })
         .then(res => {
             console.log(res.data);
             res.end()
