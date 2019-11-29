@@ -159,12 +159,12 @@ def multiply(request):
                         # print(key,value)
 
                 scheduleArr[count] = dummy
-        # for i in scheduleArr:
-        #     for key, value in i.items():
-        #         if value == 'dummy':
-        #             i[key] = 'blank'
-        #         elif value == 'blank':
-        #             i[key] = '공강'
+        for i in scheduleArr:
+            for key, value in i.items():
+                if value == 'dummy':
+                    i[key] = 'blank'
+                elif value == 'blank':
+                    i[key] = '공강'
 
         # print(scheduleArr)
         # for i in scheduleArr:  # 출력확인용
