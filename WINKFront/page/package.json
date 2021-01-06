@@ -4,7 +4,7 @@
   "description": "![alt text](https://s3.amazonaws.com/creativetim_bucket/products/22/original/opt_wizard_thumbnail.jpg \"Free Bootstrap Wizard\")",
   "main": "nodeserver.js",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bootstrap": "^4.3.1",
     "express": "^3.21.2",
     "express-session": "^1.17.0",
